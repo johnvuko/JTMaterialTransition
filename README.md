@@ -51,27 +51,30 @@ With [CocoaPods](http://cocoapods.org/), add this line to your Podfile.
 {
     [super viewDidLoad];
     
-    // No specific moment to call this method
+    // No specific moment to call this method, just before presenting a controller
     [self createTransition];
 }
 
 - (void)didPresentControllerButtonTouch
 {
-    // The controller you want to present, jut before presenting the controller
+    // The controller you want to present
     UIViewController *controller = [SecondViewController new];
     
+    // Indicate you use a custom transition
     controller.modalPresentationStyle = UIModalPresentationCustom;
     controller.transitioningDelegate = self;
 
     [self presentViewController:controller animated:YES completion:nil];
 }
 
+// Initialize the tansition
 - (void)createTransition
 {
     // self.presentControllerButton is the animatedView used for the transition
     self.transition = [[JTMaterialTransition alloc] initWithAnimatedView:self.presentControllerButton];
 }
 
+// Indicate which transition to use when you this controller present a controller
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
                                                                   presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
 {
@@ -79,6 +82,7 @@ With [CocoaPods](http://cocoapods.org/), add this line to your Podfile.
     return self.transition;
 }
 
+// Indicate which transition to use when the presented controller is dismissed
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
 {
     self.transition.reverse = YES;
