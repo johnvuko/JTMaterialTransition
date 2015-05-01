@@ -47,7 +47,7 @@
     
     CGAffineTransform finalTransform;
     {
-        CGFloat size = CGRectGetHeight(transitionContext.containerView.frame) * 1.2;
+        CGFloat size = MAX(CGRectGetHeight(transitionContext.containerView.frame), CGRectGetWidth(transitionContext.containerView.frame)) * 1.2;
         CGFloat scaleFactor = size / CGRectGetWidth(animatedViewForTransition.frame);
         finalTransform = CGAffineTransformMakeScale(scaleFactor, scaleFactor);
     }
