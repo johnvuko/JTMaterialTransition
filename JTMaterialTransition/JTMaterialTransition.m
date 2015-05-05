@@ -29,7 +29,10 @@
 
 - (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext
 {
-    NSAssert(_animatedView != nil, @"animatedView cannot be nil");
+    if(_animatedView){
+        self.startFrame = _animatedView.frame;
+        self.startBackgroundColor = _animatedView.backgroundColor;
+    }
     
     self.startFrame = _animatedView.frame;
     self.startBackgroundColor = _animatedView.backgroundColor;
