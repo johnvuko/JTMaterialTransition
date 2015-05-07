@@ -33,10 +33,7 @@
         self.startFrame = _animatedView.frame;
         self.startBackgroundColor = _animatedView.backgroundColor;
     }
-    
-    self.startFrame = _animatedView.frame;
-    self.startBackgroundColor = _animatedView.backgroundColor;
-    
+        
     UIView *animatedViewForTransition;
     
     {
