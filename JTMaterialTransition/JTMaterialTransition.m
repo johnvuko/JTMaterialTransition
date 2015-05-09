@@ -18,7 +18,7 @@
     
     NSAssert(animatedView != nil, @"animatedView cannot be nil");
     _animatedView = animatedView;
-
+    
     return self;
 }
 
@@ -30,16 +30,21 @@
 - (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext
 {
     if(_animatedView){
-        self.startFrame = _animatedView.frame;
+        NSAssert(_animatedView.superview != nil, @"animatedView must be attached to a superview");
+
+        // Get the frame rect in the screen coordinates
+        self.startFrame = [_animatedView.superview convertRect:_animatedView.frame toView:nil];
         self.startBackgroundColor = _animatedView.backgroundColor;
     }
-        
-    UIView *animatedViewForTransition;
     
+    // Use if the transitionContext.containerView is not fullscreen
+    CGRect startFrame = [transitionContext.containerView.superview convertRect:self.startFrame toView:transitionContext.containerView];
+    
+    UIView *animatedViewForTransition;
     {
-        animatedViewForTransition = [[UIView alloc] initWithFrame:self.startFrame];
+        animatedViewForTransition = [[UIView alloc] initWithFrame:startFrame];
         [transitionContext.containerView addSubview:animatedViewForTransition];
-
+        
         animatedViewForTransition.clipsToBounds = YES;
         animatedViewForTransition.layer.cornerRadius = CGRectGetHeight(animatedViewForTransition.frame) / 2.;
         animatedViewForTransition.backgroundColor = self.startBackgroundColor;
@@ -66,7 +71,7 @@
         presentedController.view.frame = transitionContext.containerView.bounds;
         [transitionContext.containerView addSubview:presentedController.view];
     }
- 
+    
     if(!self.isReverse){
         [UIView transitionWithView:animatedViewForTransition
                           duration:[self transitionDuration:transitionContext] * .7
@@ -96,7 +101,7 @@
                          animations:^{
                              presentedController.view.layer.opacity = 0;
                          } completion:nil];
-    
+        
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * [self transitionDuration:transitionContext] * .32), dispatch_get_main_queue(), ^{
             [UIView transitionWithView:animatedViewForTransition
                               duration:[self transitionDuration:transitionContext] * .58
@@ -104,7 +109,7 @@
                             animations:^{
                                 animatedViewForTransition.transform = CGAffineTransformIdentity;
                                 animatedViewForTransition.backgroundColor = self.startBackgroundColor;
-                                animatedViewForTransition.frame = self.startFrame;
+                                animatedViewForTransition.frame = startFrame;
                             } completion:^(BOOL finished) {
                                 [animatedViewForTransition removeFromSuperview];
                                 [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
