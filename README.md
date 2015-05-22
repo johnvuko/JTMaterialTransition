@@ -96,6 +96,10 @@ With [CocoaPods](http://cocoapods.org/), add this line to your Podfile.
 The `animatedView` is not directly used, a new view is created based on the `frame`, `backgroundColor` properties for the animation. If you don't want to provide a view, you have to set `startFrame` and `startBackgroundColor` properties and call `init` instead of `initWithAnimatedView:`.
 `startFrame` must be the coordinates relative to the window.
 
+## Warning
+
+The controller presented must have a `backgroundColor` else the effect can be a little strange. If you use a `UINavigationController` or another container don't forget to set the `backgroundColor` with `controllerPresented.view.backgroundColor = [UIColor yourColor];`.
+
 ## Requirements
 
 - iOS 7 or higher
