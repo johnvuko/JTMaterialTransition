@@ -116,3 +116,7 @@ The controller presented must have a `backgroundColor` else the effect can be a 
 ## License
 
 JTMaterialTransition is released under the MIT license. See the LICENSE file for more info.
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/jonathantribouharet/jtmaterialtransition/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
