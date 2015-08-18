@@ -15,7 +15,7 @@
     if(!self){
         return nil;
     }
-    
+    self.animationDuration = .5;
     NSAssert(animatedView != nil, @"animatedView cannot be nil");
     _animatedView = animatedView;
     
@@ -24,17 +24,18 @@
 
 - (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext
 {
-    return .5;
+    return self.animationDuration;
 }
 
 - (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext
 {
-    if(_animatedView){
-        NSAssert(_animatedView.superview != nil, @"animatedView must be attached to a superview");
-
+    if(self.animatedView)
+    {
+        NSAssert(self.animatedView.superview != nil, @"animatedView must be attached to a superview");
+        
         // Get the frame rect in the screen coordinates
-        self.startFrame = [_animatedView.superview convertRect:_animatedView.frame toView:nil];
-        self.startBackgroundColor = _animatedView.backgroundColor;
+        self.startFrame = [self.animatedView.superview convertRect:self.animatedView.frame toView:nil];
+        self.startBackgroundColor = self.animatedView.backgroundColor;
     }
     
     // Use if the transitionContext.containerView is not fullscreen
@@ -58,14 +59,17 @@
     }
     
     UIViewController *presentedController;
-    if(!self.isReverse){
+    
+    if(!self.isReverse)
+    {
         presentedController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
         
         presentedController.view.frame = transitionContext.containerView.bounds;
         presentedController.view.layer.opacity = 0;
         [transitionContext.containerView addSubview:presentedController.view];
     }
-    else{
+    else
+    {
         presentedController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
         
         presentedController.view.frame = transitionContext.containerView.bounds;
@@ -116,6 +120,22 @@
                             }];
         });
     }
+}
+
+#pragma Transition Delegate
+
+// Indicate which transition to use when you this controller present a controller
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
+{
+    self.reverse = NO;
+    return self;
+}
+
+// Indicate which transition to use when the presented controller is dismissed
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
+{
+    self.reverse = YES;
+    return self;
 }
 
 @end

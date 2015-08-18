@@ -51,7 +51,7 @@
     UIViewController *controller = [SecondViewController new];
     
     controller.modalPresentationStyle = UIModalPresentationCustom;
-    controller.transitioningDelegate = self;
+    controller.transitioningDelegate = self.transition;
 
     [self presentViewController:controller animated:YES completion:nil];
 }
@@ -61,19 +61,7 @@
 - (void)createTransition
 {
     self.transition = [[JTMaterialTransition alloc] initWithAnimatedView:self.presentControllerButton];
-}
-
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
-                                                                  presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
-{
-    self.transition.reverse = NO;
-    return self.transition;
-}
-
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
-{
-    self.transition.reverse = YES;
-    return self.transition;
+    self.transition.animationDuration = 0.6f;
 }
 
 @end
