@@ -16,9 +16,19 @@
 @property (nonatomic) JTMaterialTransition *transition;
 @property (nonatomic) UIButton *presentControllerButton;
 
+@property (nonatomic, strong) UISwitch *switchControl;
+
+@property (nonatomic, assign) NSInteger viewWillAppearCount;
+
 @end
 
 @implementation ViewController
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.viewWillAppearCount ++;
+    [[[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"viewWillAppear called count : %ld", (long)self.viewWillAppearCount] delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil] show];
+}
 
 - (void)viewDidLoad
 {
@@ -26,6 +36,7 @@
     
     [self createPresentControllerButton];
     [self createTransition];
+    [self createSwitchControl];
 }
 
 - (void)createPresentControllerButton
@@ -46,13 +57,28 @@
     [self.view addSubview:self.presentControllerButton];
 }
 
+- (void)createSwitchControl {
+    self.switchControl = [[UISwitch alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.presentControllerButton.frame) + 100, 80, 44)];
+    CGPoint center = self.switchControl.center;
+    center.x = CGRectGetMidX(self.view.bounds);
+    self.switchControl.center = center;
+    self.switchControl.on = NO;
+    [self.view addSubview:self.switchControl];
+}
+
 - (void)didPresentControllerButtonTouch
 {
     UIViewController *controller = [SecondViewController new];
     
-    controller.modalPresentationStyle = UIModalPresentationCustom;
-    controller.transitioningDelegate = self;
-
+    // If use UIViewControllerTransitioningDelegate, the viewWillAppear just call one
+    
+    // If don't use JTMaterialTransition, the viewWillAppear called at initlizer and close secondViewController page
+    
+    if (self.switchControl.on) {
+        controller.modalPresentationStyle = UIModalPresentationCustom;
+        controller.transitioningDelegate = self;
+    }
+    
     [self presentViewController:controller animated:YES completion:nil];
 }
 
