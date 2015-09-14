@@ -5,7 +5,7 @@
 //  Created by Jonathan Tribouharet
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface JTMaterialTransition : NSObject<UIViewControllerAnimatedTransitioning>
 
