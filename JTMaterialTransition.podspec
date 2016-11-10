@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
   s.name         = "JTMaterialTransition"
-  s.version      = "1.0.6"
+  s.version      = "2.0.0"
   s.summary      = "An iOS transition for controllers based on material design."
   s.homepage     = "https://github.com/jonathantribouharet/JTMaterialTransition"
   s.license      = { :type => 'MIT' }
   s.author       = { "Jonathan Tribouharet" => "jonathan.tribouharet@gmail.com" }
-  s.platform     = :ios, '7.0'
+  s.platform     = :ios, '8.0'
   s.source       = { :git => "https://github.com/jonathantribouharet/JTMaterialTransition.git", :tag => s.version.to_s }
   s.source_files  = 'JTMaterialTransition/*'
   s.requires_arc = true
