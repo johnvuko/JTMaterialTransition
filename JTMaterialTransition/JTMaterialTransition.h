@@ -7,7 +7,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JTMaterialTransition : NSObject<UIViewControllerAnimatedTransitioning>
+@interface JTMaterialTransition : NSObject<UIViewControllerAnimatedTransitioning, UIViewControllerTransitioningDelegate>
 
 @property (weak, nonatomic) UIView *animatedView;
 

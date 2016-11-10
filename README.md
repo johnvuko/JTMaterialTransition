@@ -22,15 +22,6 @@ With [CocoaPods](http://cocoapods.org/), add this line to your Podfile.
 ### Basic usage
 
 ```objective-c
-#import <UIKit/UIKit.h>
-
-// You have to implement UIViewControllerTransitioningDelegate protocol
-@interface ViewController : UIViewController<UIViewControllerTransitioningDelegate>
-@end
-
-```
-
-```objective-c
 #import "ViewController.h"
 
 #import <JTMaterialTransition.h>
@@ -62,7 +53,7 @@ With [CocoaPods](http://cocoapods.org/), add this line to your Podfile.
     
     // Indicate you use a custom transition
     controller.modalPresentationStyle = UIModalPresentationCustom;
-    controller.transitioningDelegate = self;
+    controller.transitioningDelegate = self.transition;
 
     [self presentViewController:controller animated:YES completion:nil];
 }
@@ -74,20 +65,6 @@ With [CocoaPods](http://cocoapods.org/), add this line to your Podfile.
     self.transition = [[JTMaterialTransition alloc] initWithAnimatedView:self.presentControllerButton];
 }
 
-// Indicate which transition to use when you this controller present a controller
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
-                                                                  presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
-{
-    self.transition.reverse = NO;
-    return self.transition;
-}
-
-// Indicate which transition to use when the presented controller is dismissed
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
-{
-    self.transition.reverse = YES;
-    return self.transition;
-}
 @end
 ```
 
