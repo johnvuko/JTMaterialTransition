@@ -1,4 +1,4 @@
-language: objective-c
+language: swift
 xcode_workspace: Example/Example.xcworkspace
 xcode_scheme: Example
 xcode_sdk: iphonesimulator

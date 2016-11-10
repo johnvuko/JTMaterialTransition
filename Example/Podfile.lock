@@ -1,5 +1,5 @@
 PODS:
-  - JTMaterialTransition (1.0.0)
+  - JTMaterialTransition (2.0.0)
 
 DEPENDENCIES:
   - JTMaterialTransition (from `..`)
@@ -9,6 +9,8 @@ EXTERNAL SOURCES:
     :path: ..
 
 SPEC CHECKSUMS:
-  JTMaterialTransition: 08586a85c84e40acf6a9c9525b3974ad7e011262
+  JTMaterialTransition: 41a202ad4b5b7e0bd609a0a8a3dbb0019d09d624
 
-COCOAPODS: 0.35.0
+PODFILE CHECKSUM: 2b797cd89d81dbce9474ccbe0969742668593e34
+
+COCOAPODS: 1.1.0.rc.2

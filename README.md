@@ -27,7 +27,7 @@ import JTMaterialTransition
 
 class ViewController: UIViewController {
 
-    waek var presentControllerButton: UIButton?
+    weak var presentControllerButton: UIButton?
     var transition: JTMaterialTransition?
 
     override func viewDidLoad() {

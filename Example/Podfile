@@ -1,5 +1,10 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
-platform :ios, '7.0'
+platform :ios, "9.0"
+use_frameworks!
 
-pod 'JTMaterialTransition', path: '..'
+target 'Example' do
+
+	pod 'JTMaterialTransition', path: '..'
+
+end
