@@ -12,7 +12,7 @@ open class JTMaterialTransition: NSObject, UIViewControllerAnimatedTransitioning
     open weak var animatedView: UIView?
     open var startFrame = CGRect()
     open var startBackgroundColor: UIColor?
-    open var isReserve = false
+    open var isReverse = false
     open var transitionDuration : TimeInterval = 0.5
 
     convenience public init(animatedView: UIView) {
@@ -115,12 +115,12 @@ open class JTMaterialTransition: NSObject, UIViewControllerAnimatedTransitioning
     // MARK - UIViewControllerTransitioningDelegate
     
     open func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        self.isReserve = false
+        self.isReverse = false
         return self
     }
     
     open func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        self.isReserve = true
+        self.isReverse = true
         return self
     }
     
