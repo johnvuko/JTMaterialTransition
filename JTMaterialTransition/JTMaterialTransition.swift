@@ -47,7 +47,7 @@ open class JTMaterialTransition: NSObject, UIViewControllerAnimatedTransitioning
 
         let presentedController: UIViewController
         
-        if !self.isReserve {
+        if !self.isReverse {
             presentedController = transitionContext.viewController(forKey: .to)!
             presentedController.view.layer.opacity = 0
         }
@@ -64,7 +64,7 @@ open class JTMaterialTransition: NSObject, UIViewControllerAnimatedTransitioning
         let finalTransform = CGAffineTransform(scaleX: scaleFactor, y: scaleFactor)
         
         
-        if !self.isReserve {
+        if !self.isReverse {
             UIView.transition(with: animatedViewForTransition,
                               duration: self.transitionDuration(using: transitionContext) * 0.7,
                               options: [],
