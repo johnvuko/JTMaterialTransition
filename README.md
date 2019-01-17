@@ -64,11 +64,11 @@ The controller presented must have a `backgroundColor` else the effect can be a 
 ## Requirements
 
 - iOS 8.0 or higher
-- Swift 3.0
+- Swift 4.2
 
 ## Author
 
-- [Jonathan Tribouharet](https://github.com/jonathantribouharet) ([@johntribouharet](https://twitter.com/johntribouharet))
+- [Jonathan VUKOVICH TRIBOUHARET](https://github.com/jonathantribouharet) ([@johnvuko](https://twitter.com/johnvuko))
 
 ## License
 
